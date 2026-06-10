@@ -12,6 +12,7 @@ interface EditorProps {
   initialContent: string
   readOnly?: boolean
   onSaveStatus?: (status: 'saving' | 'saved' | 'error') => void
+  onContentChange?: (content: string) => void
 }
 
 function parseContent(raw: string) {
@@ -27,7 +28,7 @@ function parseContent(raw: string) {
   }
 }
 
-export default function TiptapEditor({ documentId, initialContent, readOnly = false, onSaveStatus }: EditorProps) {
+export default function TiptapEditor({ documentId, initialContent, readOnly = false, onSaveStatus, onContentChange }: EditorProps) {
   const saveTimeout = useRef<NodeJS.Timeout | null>(null)
   const isDirty = useRef(false)
 
@@ -58,10 +59,11 @@ export default function TiptapEditor({ documentId, initialContent, readOnly = fa
     editable: !readOnly,
     onUpdate: ({ editor }) => {
       if (readOnly) return
+      const json = JSON.stringify(editor.getJSON())
+      onContentChange?.(json)
       isDirty.current = true
       if (saveTimeout.current) clearTimeout(saveTimeout.current)
       saveTimeout.current = setTimeout(() => {
-        const json = JSON.stringify(editor.getJSON())
         save(json)
         isDirty.current = false
       }, 1500)

@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import ShareModal from './ShareModal'
+import ExportButton from './ExportButton'
 
 const TiptapEditor = dynamic(() => import('./editor/Editor'), { ssr: false })
 
@@ -18,6 +19,7 @@ export default function DocumentEditor({ doc, isOwner, readOnly }: DocumentEdito
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'error' | 'idle'>('idle')
   const [showShare, setShowShare] = useState(false)
   const [editingTitle, setEditingTitle] = useState(false)
+  const contentRef = useRef(doc.content)
 
   const handleSaveStatus = useCallback((status: 'saving' | 'saved' | 'error') => {
     setSaveStatus(status)
@@ -35,13 +37,19 @@ export default function DocumentEditor({ doc, isOwner, readOnly }: DocumentEdito
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* Header */}
-      <header className="flex items-center justify-between px-4 py-2 border-b border-gray-200 bg-white sticky top-0 z-10">
-        <div className="flex items-center gap-3 min-w-0">
-          <Link href="/dashboard" className="text-gray-400 hover:text-gray-600 flex-shrink-0" title="Back to dashboard">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <header className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-white sticky top-0 z-10 shadow-sm">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-1.5 text-gray-400 hover:text-gray-700 flex-shrink-0 transition-colors group"
+            title="Back to dashboard"
+          >
+            <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
+            <span className="text-xs font-medium hidden sm:block">Docs</span>
           </Link>
+          <span className="text-gray-200 select-none">/</span>
 
           {editingTitle && !readOnly ? (
             <input
@@ -62,12 +70,12 @@ export default function DocumentEditor({ doc, isOwner, readOnly }: DocumentEdito
                   setEditingTitle(false)
                 }
               }}
-              className="text-base font-medium text-gray-900 border-b-2 border-blue-500 focus:outline-none bg-transparent min-w-0 w-full max-w-md"
+              className="text-sm font-semibold text-gray-900 border-b-2 border-indigo-500 focus:outline-none bg-transparent min-w-0 w-full max-w-md"
             />
           ) : (
             <h1
-              className={`text-base font-medium text-gray-900 truncate max-w-xs sm:max-w-md ${
-                readOnly ? '' : 'cursor-pointer hover:text-blue-600'
+              className={`text-sm font-semibold text-gray-700 truncate max-w-xs sm:max-w-md transition-colors ${
+                readOnly ? 'cursor-default' : 'cursor-pointer hover:text-indigo-600'
               }`}
               onClick={() => !readOnly && setEditingTitle(true)}
               title={readOnly ? undefined : 'Click to rename'}
@@ -79,19 +87,40 @@ export default function DocumentEditor({ doc, isOwner, readOnly }: DocumentEdito
 
         <div className="flex items-center gap-3 flex-shrink-0">
           {/* Save status */}
-          <span className="text-xs text-gray-400 hidden sm:block">
-            {saveStatus === 'saving' && 'Saving…'}
-            {saveStatus === 'saved' && 'Saved ✓'}
-            {saveStatus === 'error' && 'Save error'}
-          </span>
+          <div className="hidden sm:flex items-center gap-1.5 text-xs min-w-[60px] justify-end">
+            {saveStatus === 'saving' && (
+              <>
+                <span className="inline-block w-3 h-3 border-2 border-gray-300 border-t-gray-500 rounded-full animate-spin" />
+                <span className="text-gray-400">Saving…</span>
+              </>
+            )}
+            {saveStatus === 'saved' && (
+              <>
+                <svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="text-emerald-600 font-medium">Saved</span>
+              </>
+            )}
+            {saveStatus === 'error' && (
+              <span className="text-red-500">Save error</span>
+            )}
+          </div>
 
-          {/* Share button — owner only */}
+          {readOnly && (
+            <span className="text-xs bg-amber-50 text-amber-600 border border-amber-100 px-2.5 py-1 rounded-full font-medium">
+              View only
+            </span>
+          )}
+
+          <ExportButton title={title} getContent={() => contentRef.current} />
+
           {isOwner && (
             <button
               onClick={() => setShowShare(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition-all shadow-sm hover:shadow-md hover:shadow-indigo-200"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
               </svg>
               Share
@@ -100,17 +129,17 @@ export default function DocumentEditor({ doc, isOwner, readOnly }: DocumentEdito
         </div>
       </header>
 
-      {/* Editor */}
+      {/* Editor area */}
       <div className="flex-1 max-w-4xl w-full mx-auto">
         <TiptapEditor
           documentId={doc.id}
           initialContent={doc.content}
           readOnly={readOnly}
           onSaveStatus={handleSaveStatus}
+          onContentChange={(c) => { contentRef.current = c }}
         />
       </div>
 
-      {/* Share modal */}
       {showShare && (
         <ShareModal documentId={doc.id} onClose={() => setShowShare(false)} />
       )}

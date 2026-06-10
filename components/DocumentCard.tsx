@@ -21,36 +21,39 @@ function timeAgo(date: Date): string {
   return `${Math.floor(seconds / 86400)}d ago`
 }
 
+const BADGE_STYLES: Record<string, string> = {
+  owner: 'bg-indigo-50 text-indigo-600',
+  edit: 'bg-emerald-50 text-emerald-600',
+  view: 'bg-gray-100 text-gray-500',
+}
+
 export default function DocumentCard({ doc, isOwned, ownerName, permission }: Props) {
+  const badgeKey = isOwned ? 'owner' : (permission ?? 'view')
+  const badgeLabel = isOwned ? 'Owner' : (permission === 'edit' ? 'Can edit' : 'View only')
+
   return (
     <Link
       href={`/documents/${doc.id}`}
-      className="group block bg-white border border-gray-200 rounded-xl p-4 hover:border-blue-300 hover:shadow-sm transition-all"
+      className="group block bg-white border border-gray-100 rounded-2xl p-5 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-50/60 transition-all duration-200"
     >
-      <div className="flex items-start justify-between mb-3">
-        <div className="w-8 h-10 bg-blue-50 rounded flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="flex items-start justify-between mb-4">
+        <div className="w-9 h-11 bg-indigo-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-indigo-100 transition-colors">
+          <svg className="w-5 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
         </div>
-        <div className="flex flex-col items-end gap-1">
-          {isOwned ? (
-            <span className="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-medium">Owner</span>
-          ) : (
-            <span className="text-xs bg-gray-50 text-gray-500 px-2 py-0.5 rounded-full font-medium capitalize">
-              {permission}
-            </span>
-          )}
-        </div>
+        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${BADGE_STYLES[badgeKey] ?? BADGE_STYLES.view}`}>
+          {badgeLabel}
+        </span>
       </div>
 
-      <h3 className="font-medium text-gray-900 text-sm truncate mb-1 group-hover:text-blue-600 transition-colors">
+      <h3 className="font-semibold text-gray-900 text-sm truncate mb-1.5 group-hover:text-indigo-600 transition-colors">
         {doc.title || 'Untitled Document'}
       </h3>
 
-      <div className="text-xs text-gray-400">
-        {!isOwned && ownerName && <span className="block truncate">by {ownerName}</span>}
-        <span>{timeAgo(doc.updatedAt)}</span>
+      <div className="text-xs text-gray-400 space-y-0.5">
+        {!isOwned && ownerName && <p className="truncate">by {ownerName}</p>}
+        <p>{timeAgo(doc.updatedAt)}</p>
       </div>
     </Link>
   )
