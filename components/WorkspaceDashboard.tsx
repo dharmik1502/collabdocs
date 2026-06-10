@@ -64,21 +64,21 @@ export default function WorkspaceDashboard({ docs, userName, ownedCount, sharedC
   }
 
   return (
-    <div className="bg-slate-950">
+    <div className="bg-white">
       {/* ── Hero ── */}
-      <div className="relative overflow-hidden bg-slate-900 border-b border-slate-800">
-        {/* Ambient glow blobs */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-sky-500/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-blue-900/30 rounded-full translate-y-1/2 blur-3xl pointer-events-none" />
+      <div className="relative overflow-hidden bg-white border-b border-gray-100">
+        {/* Subtle ambient glow */}
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-50 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-sky-50 rounded-full translate-y-1/2 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6 py-10">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <p className="text-sky-400 text-sm font-medium mb-1">
+              <p className="text-blue-600 text-sm font-medium mb-1">
                 Welcome back, {userName}
               </p>
-              <h1 className="text-3xl font-bold text-white tracking-tight">My Workspace</h1>
-              <p className="text-slate-400 text-sm mt-1.5">
+              <h1 className="text-3xl font-bold text-blue-800 tracking-tight">My Workspace</h1>
+              <p className="text-gray-500 text-sm mt-1.5">
                 Create, edit, import and manage your documents collaboratively.
               </p>
             </div>
@@ -95,10 +95,10 @@ export default function WorkspaceDashboard({ docs, userName, ownedCount, sharedC
               <button
                 onClick={() => inputRef.current?.click()}
                 disabled={uploading}
-                className="flex items-center gap-2 px-4 py-2 bg-slate-800/80 backdrop-blur-sm hover:bg-slate-700 text-slate-300 hover:text-white text-sm font-semibold rounded-xl border border-slate-700 hover:border-sky-700/60 transition-all disabled:opacity-60"
+                className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-50 text-gray-600 hover:text-gray-800 text-sm font-semibold rounded-xl border border-gray-200 hover:border-blue-300 transition-all disabled:opacity-60"
               >
                 {uploading ? (
-                  <span className="w-4 h-4 border-2 border-slate-500 border-t-sky-400 rounded-full animate-spin" />
+                  <span className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
                 ) : (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -120,10 +120,10 @@ export default function WorkspaceDashboard({ docs, userName, ownedCount, sharedC
             ].map(({ label, value }) => (
               <div
                 key={label}
-                className="bg-slate-800/60 backdrop-blur-sm rounded-2xl px-5 py-3 border border-slate-700/60 min-w-[100px]"
+                className="bg-blue-50 rounded-2xl px-5 py-3 border border-blue-100 min-w-[100px]"
               >
-                <p className="text-2xl font-bold text-white tabular-nums">{value}</p>
-                <p className="text-xs text-slate-400 mt-0.5">{label}</p>
+                <p className="text-2xl font-bold text-blue-800 tabular-nums">{value}</p>
+                <p className="text-xs text-gray-500 mt-0.5">{label}</p>
               </div>
             ))}
           </div>
@@ -131,10 +131,10 @@ export default function WorkspaceDashboard({ docs, userName, ownedCount, sharedC
       </div>
 
       {/* ── Controls bar ── */}
-      <div className="bg-slate-900/80 backdrop-blur-xl border-b border-slate-800 sticky top-14 z-10">
+      <div className="bg-white/90 backdrop-blur-xl border-b border-gray-100 sticky top-14 z-10">
         <div className="max-w-7xl mx-auto px-6 py-3 flex flex-wrap items-center gap-3">
           {/* Tab pills */}
-          <div className="flex items-center bg-slate-800/80 border border-slate-700/60 rounded-xl p-1 gap-0.5">
+          <div className="flex items-center bg-gray-100 border border-gray-200 rounded-xl p-1 gap-0.5">
             {TABS.map((t) => (
               <button
                 key={t.key}
@@ -142,7 +142,7 @@ export default function WorkspaceDashboard({ docs, userName, ownedCount, sharedC
                 className={`px-3.5 py-1.5 text-sm font-medium rounded-lg transition-all ${
                   tab === t.key
                     ? 'bg-gradient-to-b from-sky-400 to-blue-800 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-700/60'
+                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200'
                 }`}
               >
                 {t.label}
@@ -153,7 +153,7 @@ export default function WorkspaceDashboard({ docs, userName, ownedCount, sharedC
           {/* Search */}
           <div className="flex-1 min-w-[180px] max-w-sm relative">
             <svg
-              className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+              className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
               fill="none" stroke="currentColor" viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -164,7 +164,7 @@ export default function WorkspaceDashboard({ docs, userName, ownedCount, sharedC
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search documents by title..."
-              className="w-full pl-9 pr-4 py-2 border border-slate-700 rounded-xl text-sm bg-slate-800 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
+              className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
 
@@ -172,7 +172,7 @@ export default function WorkspaceDashboard({ docs, userName, ownedCount, sharedC
           <button
             onClick={() => startTransition(() => router.refresh())}
             title="Refresh"
-            className="w-9 h-9 flex items-center justify-center bg-slate-800 border border-slate-700 rounded-xl text-slate-400 hover:text-slate-200 hover:border-slate-600 transition-all ml-auto"
+            className="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 rounded-xl text-gray-400 hover:text-blue-600 hover:border-blue-300 transition-all ml-auto"
           >
             <svg
               className={`w-4 h-4 ${isPending ? 'animate-spin' : ''}`}
@@ -188,17 +188,17 @@ export default function WorkspaceDashboard({ docs, userName, ownedCount, sharedC
       {/* ── Document grid ── */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         {filtered.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 bg-slate-900/60 rounded-2xl border border-slate-800 text-center">
-            <div className="w-14 h-14 bg-gradient-to-b from-sky-400/20 to-blue-900/20 rounded-2xl flex items-center justify-center mb-4 border border-sky-900/40">
-              <svg className="w-7 h-7 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex flex-col items-center justify-center py-20 bg-gray-50 rounded-2xl border border-gray-200 text-center">
+            <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-4 border border-blue-100">
+              <svg className="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                   d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
-            <p className="text-sm font-bold text-slate-300 mb-1">
+            <p className="text-sm font-bold text-gray-700 mb-1">
               {search ? 'No documents found' : 'No documents yet'}
             </p>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-gray-400">
               {search ? 'Try a different search term' : 'Create a document or import a file to get started'}
             </p>
           </div>

@@ -21,8 +21,8 @@ function ToolButton({ onClick, active, title, children }: ToolButtonProps) {
       title={title}
       className={`p-1.5 rounded-lg text-sm font-medium transition-all ${
         active
-          ? 'bg-sky-900/60 text-sky-300 shadow-sm border border-sky-800/50'
-          : 'text-slate-400 hover:bg-slate-700 hover:text-slate-200'
+          ? 'bg-blue-50 text-blue-600 shadow-sm border border-blue-200'
+          : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'
       }`}
     >
       {children}
@@ -31,12 +31,12 @@ function ToolButton({ onClick, active, title, children }: ToolButtonProps) {
 }
 
 function Divider() {
-  return <div className="w-px h-5 bg-slate-700 mx-1.5 flex-shrink-0" />
+  return <div className="w-px h-5 bg-gray-200 mx-1.5 flex-shrink-0" />
 }
 
 export default function Toolbar({ editor }: ToolbarProps) {
   return (
-    <div className="flex flex-wrap items-center gap-0.5 px-4 py-2 border-b border-slate-200 bg-white">
+    <div className="flex flex-wrap items-center gap-0.5 px-4 py-2 border-b border-gray-200 bg-white">
       <ToolButton
         onClick={() => editor.chain().focus().toggleBold().run()}
         active={editor.isActive('bold')}

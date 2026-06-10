@@ -35,13 +35,13 @@ export default function DocumentEditor({ doc, isOwner, readOnly }: DocumentEdito
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950">
+    <div className="min-h-screen flex flex-col bg-white">
       {/* Header */}
-      <header className="flex items-center justify-between px-4 py-2.5 border-b border-slate-800 bg-slate-900/90 backdrop-blur-xl sticky top-0 z-10 shadow-md shadow-slate-950/50">
+      <header className="flex items-center justify-between px-4 py-2.5 border-b border-gray-200 bg-white sticky top-0 z-10 shadow-sm shadow-gray-100">
         <div className="flex items-center gap-2.5 min-w-0">
           <Link
             href="/dashboard"
-            className="flex items-center gap-1.5 text-slate-500 hover:text-slate-300 flex-shrink-0 transition-colors group"
+            className="flex items-center gap-1.5 text-gray-400 hover:text-gray-600 flex-shrink-0 transition-colors group"
             title="Back to dashboard"
           >
             <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@ export default function DocumentEditor({ doc, isOwner, readOnly }: DocumentEdito
             </svg>
             <span className="text-xs font-medium hidden sm:block">Docs</span>
           </Link>
-          <span className="text-slate-700 select-none">/</span>
+          <span className="text-gray-300 select-none">/</span>
 
           {editingTitle && !readOnly ? (
             <input
@@ -61,12 +61,12 @@ export default function DocumentEditor({ doc, isOwner, readOnly }: DocumentEdito
                 if (e.key === 'Enter') { setEditingTitle(false); saveTitle(title) }
                 if (e.key === 'Escape') { setTitle(doc.title); setEditingTitle(false) }
               }}
-              className="text-sm font-semibold text-white border-b-2 border-sky-500 focus:outline-none bg-transparent min-w-0 w-full max-w-md"
+              className="text-sm font-semibold text-gray-900 border-b-2 border-blue-500 focus:outline-none bg-transparent min-w-0 w-full max-w-md"
             />
           ) : (
             <h1
-              className={`text-sm font-semibold text-slate-300 truncate max-w-xs sm:max-w-md transition-colors ${
-                readOnly ? 'cursor-default' : 'cursor-pointer hover:text-sky-400'
+              className={`text-sm font-semibold text-gray-800 truncate max-w-xs sm:max-w-md transition-colors ${
+                readOnly ? 'cursor-default' : 'cursor-pointer hover:text-blue-600'
               }`}
               onClick={() => !readOnly && setEditingTitle(true)}
               title={readOnly ? undefined : 'Click to rename'}
@@ -81,23 +81,23 @@ export default function DocumentEditor({ doc, isOwner, readOnly }: DocumentEdito
           <div className="hidden sm:flex items-center gap-1.5 text-xs min-w-[60px] justify-end">
             {saveStatus === 'saving' && (
               <>
-                <span className="w-3 h-3 border-2 border-slate-600 border-t-slate-400 rounded-full animate-spin" />
-                <span className="text-slate-500">Saving…</span>
+                <span className="w-3 h-3 border-2 border-gray-200 border-t-gray-400 rounded-full animate-spin" />
+                <span className="text-gray-400">Saving…</span>
               </>
             )}
             {saveStatus === 'saved' && (
               <>
-                <svg className="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-sky-400 font-medium">Saved</span>
+                <span className="text-blue-600 font-medium">Saved</span>
               </>
             )}
-            {saveStatus === 'error' && <span className="text-red-400">Save error</span>}
+            {saveStatus === 'error' && <span className="text-red-500">Save error</span>}
           </div>
 
           {readOnly && (
-            <span className="text-xs bg-amber-950/50 text-amber-400 border border-amber-800/50 px-2.5 py-1 rounded-full font-medium">
+            <span className="text-xs bg-amber-50 text-amber-600 border border-amber-200 px-2.5 py-1 rounded-full font-medium">
               View only
             </span>
           )}
@@ -107,7 +107,7 @@ export default function DocumentEditor({ doc, isOwner, readOnly }: DocumentEdito
           {isOwner && (
             <button
               onClick={() => setShowShare(true)}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-semibold text-white bg-gradient-to-b from-sky-400 to-blue-800 hover:from-sky-300 hover:to-blue-700 rounded-xl transition-all shadow-md shadow-sky-900/40 hover:shadow-sky-800/60"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-semibold text-white bg-gradient-to-b from-sky-400 to-blue-800 hover:from-sky-300 hover:to-blue-700 rounded-xl transition-all shadow-md shadow-blue-300/40 hover:shadow-blue-400/60"
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}

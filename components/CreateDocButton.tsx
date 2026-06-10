@@ -23,7 +23,7 @@ export default function CreateDocButton() {
     <button
       onClick={create}
       disabled={loading}
-      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-b from-sky-400 to-blue-800 hover:from-sky-300 hover:to-blue-700 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-sky-900/40 hover:shadow-sky-800/60 disabled:opacity-60 border border-sky-500/20"
+      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-b from-sky-400 to-blue-800 hover:from-sky-300 hover:to-blue-700 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-blue-300/40 hover:shadow-blue-400/60 disabled:opacity-60 border border-sky-500/20"
     >
       {loading ? (
         <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

@@ -18,11 +18,11 @@ function getInitials(name: string): string {
 }
 
 const AVATAR_COLORS = [
-  'bg-sky-900/60 text-sky-300',
-  'bg-blue-900/60 text-blue-300',
-  'bg-indigo-900/60 text-indigo-300',
-  'bg-cyan-900/60 text-cyan-300',
-  'bg-violet-900/60 text-violet-300',
+  'bg-sky-100 text-sky-700',
+  'bg-blue-100 text-blue-700',
+  'bg-indigo-100 text-indigo-700',
+  'bg-cyan-100 text-cyan-700',
+  'bg-violet-100 text-violet-700',
 ]
 
 function avatarColor(name: string): string {
@@ -84,22 +84,22 @@ export default function ShareModal({ documentId, onClose }: ShareModalProps) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-slate-900 rounded-2xl shadow-2xl shadow-black/60 border border-slate-800 w-full max-w-md overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl shadow-2xl shadow-gray-200/80 border border-gray-200 w-full max-w-md overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 bg-sky-900/50 rounded-lg flex items-center justify-center border border-sky-800/50">
-              <svg className="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-7 h-7 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-200">
+              <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                   d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
               </svg>
             </div>
-            <h2 className="text-base font-semibold text-slate-100">Share document</h2>
+            <h2 className="text-base font-semibold text-gray-900">Share document</h2>
           </div>
           <button
             onClick={onClose}
-            className="w-7 h-7 flex items-center justify-center rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800 transition-colors"
+            className="w-7 h-7 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -115,13 +115,13 @@ export default function ShareModal({ documentId, onClose }: ShareModalProps) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter email address…"
-              className="flex-1 px-3.5 py-2 border border-slate-700 rounded-xl text-sm bg-slate-800 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
+              className="flex-1 px-3.5 py-2 border border-gray-200 rounded-xl text-sm bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               onKeyDown={(e) => e.key === 'Enter' && addShare()}
             />
             <select
               value={permission}
               onChange={(e) => setPermission(e.target.value as 'view' | 'edit')}
-              className="px-2.5 py-2 border border-slate-700 rounded-xl text-sm bg-slate-800 text-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
+              className="px-2.5 py-2 border border-gray-200 rounded-xl text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             >
               <option value="view">View</option>
               <option value="edit">Edit</option>
@@ -129,7 +129,7 @@ export default function ShareModal({ documentId, onClose }: ShareModalProps) {
             <button
               onClick={addShare}
               disabled={loading}
-              className="px-4 py-2 bg-gradient-to-b from-sky-400 to-blue-800 hover:from-sky-300 hover:to-blue-700 disabled:opacity-60 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-sky-900/40"
+              className="px-4 py-2 bg-gradient-to-b from-sky-400 to-blue-800 hover:from-sky-300 hover:to-blue-700 disabled:opacity-60 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-blue-300/40"
             >
               {loading ? (
                 <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -138,7 +138,7 @@ export default function ShareModal({ documentId, onClose }: ShareModalProps) {
           </div>
 
           {error && (
-            <div className="flex items-center gap-2 text-xs text-red-400 bg-red-950/40 border border-red-800/50 rounded-xl px-3 py-2.5">
+            <div className="flex items-center gap-2 text-xs text-red-600 bg-red-50 border border-red-200 rounded-xl px-3 py-2.5">
               <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                   d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -147,7 +147,7 @@ export default function ShareModal({ documentId, onClose }: ShareModalProps) {
             </div>
           )}
           {success && (
-            <div className="flex items-center gap-2 text-xs text-sky-300 bg-sky-950/40 border border-sky-800/50 rounded-xl px-3 py-2.5">
+            <div className="flex items-center gap-2 text-xs text-blue-700 bg-blue-50 border border-blue-200 rounded-xl px-3 py-2.5">
               <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
               </svg>
@@ -158,30 +158,30 @@ export default function ShareModal({ documentId, onClose }: ShareModalProps) {
           {/* Shared users */}
           {shares.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">People with access</p>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">People with access</p>
               <ul className="space-y-2">
                 {shares.map((share) => (
-                  <li key={share.id} className="flex items-center justify-between py-2 px-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 transition-colors border border-slate-700/60">
+                  <li key={share.id} className="flex items-center justify-between py-2 px-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-200">
                     <div className="flex items-center gap-3">
-                      <span className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 border border-slate-700/60 ${avatarColor(share.user.name)}`}>
+                      <span className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 border border-gray-200 ${avatarColor(share.user.name)}`}>
                         {getInitials(share.user.name)}
                       </span>
                       <div>
-                        <p className="text-sm font-medium text-slate-200 leading-none mb-0.5">{share.user.name}</p>
-                        <p className="text-xs text-slate-500">{share.user.email}</p>
+                        <p className="text-sm font-medium text-gray-800 leading-none mb-0.5">{share.user.name}</p>
+                        <p className="text-xs text-gray-500">{share.user.email}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className={`text-xs px-2 py-0.5 rounded-full font-medium border ${
                         share.permission === 'edit'
-                          ? 'bg-emerald-950/50 text-emerald-400 border-emerald-800/50'
-                          : 'bg-slate-800 text-slate-400 border-slate-700'
+                          ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
+                          : 'bg-gray-100 text-gray-500 border-gray-200'
                       }`}>
                         {share.permission === 'edit' ? 'Can edit' : 'View only'}
                       </span>
                       <button
                         onClick={() => removeShare(share.id)}
-                        className="w-6 h-6 flex items-center justify-center rounded-lg text-slate-600 hover:text-red-400 hover:bg-red-950/50 transition-colors"
+                        className="w-6 h-6 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
                         title="Remove access"
                       >
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -197,21 +197,21 @@ export default function ShareModal({ documentId, onClose }: ShareModalProps) {
 
           {shares.length === 0 && (
             <div className="flex flex-col items-center justify-center py-6 text-center">
-              <div className="w-10 h-10 bg-sky-950/40 rounded-2xl flex items-center justify-center mb-2 border border-sky-900/40">
-                <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-10 h-10 bg-blue-50 rounded-2xl flex items-center justify-center mb-2 border border-blue-100">
+                <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <p className="text-sm font-medium text-slate-400">Not shared yet</p>
-              <p className="text-xs text-slate-600 mt-0.5">Add an email above to invite someone</p>
+              <p className="text-sm font-medium text-gray-500">Not shared yet</p>
+              <p className="text-xs text-gray-400 mt-0.5">Add an email above to invite someone</p>
             </div>
           )}
         </div>
 
-        <div className="px-6 py-3 bg-slate-900/60 border-t border-slate-800 rounded-b-2xl">
-          <p className="text-xs text-slate-600">
-            Try: <span className="font-mono text-slate-500">alice@demo.com</span> · <span className="font-mono text-slate-500">bob@demo.com</span> · <span className="font-mono text-slate-500">carol@demo.com</span>
+        <div className="px-6 py-3 bg-gray-50 border-t border-gray-100 rounded-b-2xl">
+          <p className="text-xs text-gray-400">
+            Try: <span className="font-mono text-gray-500">alice@demo.com</span> · <span className="font-mono text-gray-500">bob@demo.com</span> · <span className="font-mono text-gray-500">carol@demo.com</span>
           </p>
         </div>
       </div>

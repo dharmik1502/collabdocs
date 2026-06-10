@@ -28,7 +28,7 @@ export default function DocumentCard({ doc }: { doc: DocItem }) {
 
   return (
     <div
-      className={`group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden hover:shadow-xl hover:shadow-sky-950/50 hover:border-sky-900/60 hover:-translate-y-0.5 transition-all duration-200 ${
+      className={`group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl hover:shadow-blue-100 hover:border-blue-300 hover:-translate-y-0.5 transition-all duration-200 ${
         deleting ? 'opacity-40 pointer-events-none' : ''
       }`}
     >
@@ -38,8 +38,8 @@ export default function DocumentCard({ doc }: { doc: DocItem }) {
       <div className="p-5">
         {/* Icon row + delete */}
         <div className="flex items-start justify-between mb-4">
-          <div className="w-10 h-12 bg-slate-800 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-sky-900/30 transition-colors border border-slate-700/60 group-hover:border-sky-800/50">
-            <svg className="w-5 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-10 h-12 bg-gray-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-50 transition-colors border border-gray-200 group-hover:border-blue-200">
+            <svg className="w-5 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
@@ -48,7 +48,7 @@ export default function DocumentCard({ doc }: { doc: DocItem }) {
           {doc.isOwned && (
             <button
               onClick={handleDelete}
-              className="opacity-0 group-hover:opacity-100 w-7 h-7 flex items-center justify-center rounded-lg text-slate-600 hover:text-red-400 hover:bg-red-950/50 transition-all"
+              className="opacity-0 group-hover:opacity-100 w-7 h-7 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all"
               title="Delete"
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,14 +60,14 @@ export default function DocumentCard({ doc }: { doc: DocItem }) {
         </div>
 
         {/* Title */}
-        <h3 className="font-bold text-slate-200 text-sm line-clamp-2 mb-1 group-hover:text-sky-300 transition-colors leading-snug">
+        <h3 className="font-bold text-gray-800 text-sm line-clamp-2 mb-1 group-hover:text-blue-700 transition-colors leading-snug">
           {doc.title || 'Untitled Document'}
         </h3>
 
         {/* Time + shared-by */}
-        <p className="text-xs text-slate-500 mb-4">
+        <p className="text-xs text-gray-400 mb-4">
           {!doc.isOwned && doc.ownerName && (
-            <span className="text-slate-400 font-medium">{doc.ownerName} · </span>
+            <span className="text-gray-500 font-medium">{doc.ownerName} · </span>
           )}
           {timeAgo(doc.updatedAt)}
         </p>
@@ -76,17 +76,17 @@ export default function DocumentCard({ doc }: { doc: DocItem }) {
         <div className="flex items-center justify-between">
           <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
             doc.isOwned
-              ? 'bg-sky-950/60 text-sky-400 border border-sky-900/50'
+              ? 'bg-blue-50 text-blue-600 border border-blue-200'
               : doc.permission === 'edit'
-              ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-900/50'
-              : 'bg-slate-800 text-slate-400 border border-slate-700'
+              ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+              : 'bg-gray-100 text-gray-500 border border-gray-200'
           }`}>
             {doc.isOwned ? 'Owned' : doc.permission === 'edit' ? 'Can edit' : 'View only'}
           </span>
 
           <Link
             href={`/documents/${doc.id}`}
-            className="flex items-center gap-0.5 text-xs font-semibold text-sky-500 hover:text-sky-300 group/link transition-colors"
+            className="flex items-center gap-0.5 text-xs font-semibold text-blue-600 hover:text-blue-800 group/link transition-colors"
           >
             Open
             <svg className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
