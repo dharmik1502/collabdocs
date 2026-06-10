@@ -23,13 +23,13 @@ export default function CreateDocButton() {
     <button
       onClick={create}
       disabled={loading}
-      className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white text-sm font-semibold rounded-xl transition-all shadow-sm hover:shadow-md hover:shadow-indigo-200 disabled:shadow-none"
+      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-b from-sky-400 to-blue-800 hover:from-sky-300 hover:to-blue-700 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-sky-900/40 hover:shadow-sky-800/60 disabled:opacity-60 border border-sky-500/20"
     >
       {loading ? (
         <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
       ) : (
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
         </svg>
       )}
       New Document

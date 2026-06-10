@@ -19,11 +19,9 @@ function parseContent(raw: string) {
   if (!raw) return ''
   try {
     const parsed = JSON.parse(raw)
-    // If it's our HTML-import format from file uploads
     if (parsed.__html) return parsed.__html
     return parsed
   } catch {
-    // Not JSON — treat as plain text
     return raw
   }
 }
@@ -82,7 +80,7 @@ export default function TiptapEditor({ documentId, initialContent, readOnly = fa
     <div className="tiptap-editor flex flex-col">
       {!readOnly && <Toolbar editor={editor} />}
       {readOnly && (
-        <div className="px-4 py-2 border-b border-amber-200 bg-amber-50 text-xs text-amber-700">
+        <div className="px-4 py-2 border-b border-slate-200 bg-amber-50 text-xs text-amber-700">
           Read-only — you have view access to this document
         </div>
       )}

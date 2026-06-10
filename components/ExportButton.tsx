@@ -36,7 +36,6 @@ export default function ExportButton({ title, getContent }: ExportButtonProps) {
 
   function exportPDF() {
     setOpen(false)
-    // Small delay so the dropdown closes before the print dialog opens
     setTimeout(() => window.print(), 50)
   }
 
@@ -44,7 +43,7 @@ export default function ExportButton({ title, getContent }: ExportButtonProps) {
     <div className="relative" ref={containerRef}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 border border-gray-200 hover:border-gray-300 rounded-xl bg-white hover:bg-gray-50 transition-all"
+        className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 border border-slate-700 hover:border-slate-600 rounded-xl bg-slate-800/80 hover:bg-slate-800 transition-all"
         title="Export document"
       >
         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -57,19 +56,19 @@ export default function ExportButton({ title, getContent }: ExportButtonProps) {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-1.5 w-48 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden z-50">
+        <div className="absolute right-0 mt-1.5 w-48 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl shadow-black/50 overflow-hidden z-50">
           <button
             onClick={exportMarkdown}
-            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"
           >
-            <span className="w-8 text-xs font-mono text-indigo-400 bg-indigo-50 rounded px-1 py-0.5 text-center">.md</span>
+            <span className="w-8 text-xs font-mono text-sky-400 bg-sky-950/50 border border-sky-800/50 rounded px-1 py-0.5 text-center">.md</span>
             Markdown
           </button>
           <button
             onClick={exportPDF}
-            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"
           >
-            <span className="w-8 text-xs font-mono text-rose-400 bg-rose-50 rounded px-1 py-0.5 text-center">.pdf</span>
+            <span className="w-8 text-xs font-mono text-rose-400 bg-rose-950/50 border border-rose-800/50 rounded px-1 py-0.5 text-center">.pdf</span>
             PDF
           </button>
         </div>

@@ -10,7 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tiptap editor styles */
+/* Tiptap editor styles — white content area */
 .tiptap-editor .ProseMirror {
   outline: none;
   min-height: 600px;
@@ -18,6 +18,7 @@ body {
   font-size: 1rem;
   line-height: 1.75;
   color: #111827;
+  background: #ffffff;
 }
 
 .tiptap-editor .ProseMirror h1 { font-size: 2rem; font-weight: 700; margin: 1.5rem 0 0.5rem; line-height: 1.25; color: #111827; }
@@ -39,31 +40,20 @@ body {
   pointer-events: none;
 }
 
-/* Custom scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #d1d5db; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
 
 /* PDF print styles */
 @media print {
   header,
-  .tiptap-editor > div:first-child /* toolbar */,
-  .tiptap-editor .border-b.border-amber-200 /* read-only banner */ {
+  .tiptap-editor > div:first-child,
+  .tiptap-editor .border-b.border-amber-200 {
     display: none !important;
   }
-
-  body {
-    background: white;
-    font-size: 12pt;
-  }
-
-  .tiptap-editor .ProseMirror {
-    padding: 0;
-    min-height: unset;
-  }
-
-  .min-h-screen {
-    min-height: unset;
-  }
+  body { background: white; font-size: 12pt; color: #111827; }
+  .tiptap-editor .ProseMirror { padding: 0; min-height: unset; }
+  .min-h-screen { min-height: unset; }
 }
